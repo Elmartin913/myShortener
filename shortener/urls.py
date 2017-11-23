@@ -20,6 +20,6 @@ from cutter.views import (cutter_fb_view, CutterCBView)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^view-1/', cutter_fb_view),
-    url(r'^view-2/', CutterCBView.as_view()),
+    url(r'^a/(?P<shortcode>[\w-]*){6,15}/$', cutter_fb_view),
+    url(r'^b/(?P<shortcode>[\w-]+)/$', CutterCBView.as_view()),
 ]
