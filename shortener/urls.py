@@ -16,6 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from cutter.views import (cutter_fb_view, CutterCBView)
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^view-1/', cutter_fb_view),
+    url(r'^view-2/', CutterCBView.as_view()),
 ]

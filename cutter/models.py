@@ -1,8 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 from .utils import (code_generator, create_shortcode)
 
 # Create your models here.
+
+SHORTCODE_MAX = getattr(settings, 'SHORTCODE_MAX', 15)
 
 
 class ShortURLManager(models.Manager):
@@ -12,10 +15,10 @@ class ShortURLManager(models.Manager):
         return qs
 
     def refresh_shortcode(self, items=None):
-        #print(items)
+        # print(items)
         qs = ShortURL.objects.filter(id__gte=1)
         if items is not None and isinstance(items, int):
-            qs = qs.order_by('-id')[:items] #last x items
+            qs = qs.order_by('-id')[:items]  # last x items
         new_code = 0
         for q in qs:
             q.shortcode = create_shortcode(q)
@@ -27,7 +30,7 @@ class ShortURLManager(models.Manager):
 
 class ShortURL(models.Model):
     url = models.CharField(max_length=256, )
-    shortcode = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True, null=True)
     update = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
