@@ -8,7 +8,7 @@ from .utils import (code_generator, create_shortcode)
 class ShortURLManager(models.Manager):
     def all(self, *args, **kwargs):
         qs = super(ShortURLManager, self).all(*args, **kwargs)
-        qs = qs.filter(active=None)
+        qs = qs.filter(active=True)
         return qs
 
     def refresh_shortcode(self):
