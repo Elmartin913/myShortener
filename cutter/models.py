@@ -11,8 +11,11 @@ class ShortURLManager(models.Manager):
         qs = qs.filter(active=True)
         return qs
 
-    def refresh_shortcode(self):
+    def refresh_shortcode(self, items=None):
+        #print(items)
         qs = ShortURL.objects.filter(id__gte=1)
+        if items is not None and isinstance(items, int):
+            qs = qs.order_by('-id')[:items] #last x items
         new_code = 0
         for q in qs:
             q.shortcode = create_shortcode(q)
