@@ -16,10 +16,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from cutter.views import (cutter_fb_view, CutterCBView)
+from cutter.views import (
+   # cutter_fb_view,
+    CutterCBView,
+    HomeView)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^a/(?P<shortcode>[\w-]*){6,15}/$', cutter_fb_view),
-    url(r'^b/(?P<shortcode>[\w-]+)/$', CutterCBView.as_view()),
+    url(r'^$', HomeView.as_view()),
+    #url(r'^a/(?P<shortcode>[\w-]*){6,15}/$', cutter_fb_view),
+    url(r'^(?P<shortcode>[\w-]+){6,15}/$', CutterCBView.as_view()),
 ]

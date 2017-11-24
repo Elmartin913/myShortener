@@ -25,7 +25,7 @@ SECRET_KEY = 'hno@=6y(r!-j#4p7$kua&cdnf=*%i7=j(i810yn$!lb01n$f$&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.cut.com', 'cut.com', 'blog.cut.com']
+ALLOWED_HOSTS = ['www.mycutter.com', 'mycutter.com', 'blog.mycutter.com', '127.0.0.1']
 
 
 # Application definition
@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'shortener.urls'
 ROOT_HOSTCONF = 'shortener.hosts'
 DEFAULT_HOST = 'www'
-DEFAULT_REDIRECT_URL = 'http://www.cut.com:8000'
+DEFAULT_REDIRECT_URL = 'http://blog.mycutter.com:8000'
 
 TEMPLATES = [
     {
