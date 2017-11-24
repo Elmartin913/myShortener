@@ -25,7 +25,7 @@ SECRET_KEY = 'hno@=6y(r!-j#4p7$kua&cdnf=*%i7=j(i810yn$!lb01n$f$&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.cut.com', 'cut.com', 'blog.cut.com']
 
 
 # Application definition
@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_hosts',
     'cutter',
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,9 +50,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'shortener.urls'
+ROOT_HOSTCONF = 'shortener.hosts'
+DEFAULT_HOST = 'www'
+DEFAULT_REDIRECT_URL = 'http://www.cut.com:8000'
 
 TEMPLATES = [
     {
