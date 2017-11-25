@@ -17,12 +17,28 @@ class HomeView(View):
         return render(request, 'cutter/home.html', context)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
-        print(request.POST.get('url'))
+        # print(request.POST)
+        # print(request.POST.get('url'))
         form = SubmitUrlForm(request.POST)
+        context = {
+            'title': 'Cutter site',
+            'form': form,
+        }
+        template = 'cutter/home.html'
         if form.is_valid():
-            print(form.cleaned_data)
-        return render(request, 'cutter/home.html', {})
+            print(form.cleaned_data.get('url'))
+            new_url = form.cleaned_data.get('url')
+            obj, created = ShortURL.objects.get_or_create(url=new_url)
+            context = {
+                'object': obj,
+                'create': created,
+            }
+            if created:
+                template = 'cutter/succes.html'
+            else:
+                template = 'cutter/exists.html'
+
+        return render(request, template, context)
 
 
 class CutterCBView(View):  # class base view

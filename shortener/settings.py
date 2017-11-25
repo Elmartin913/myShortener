@@ -57,6 +57,7 @@ ROOT_URLCONF = 'shortener.urls'
 ROOT_HOSTCONF = 'shortener.hosts'
 DEFAULT_HOST = 'www'
 DEFAULT_REDIRECT_URL = 'http://blog.mycutter.com:8000'
+PARENT_HOST = 'mycutter.com'
 
 TEMPLATES = [
     {
