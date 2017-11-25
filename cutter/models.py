@@ -4,6 +4,7 @@ from django.conf import settings
 from django_hosts.resolvers import reverse
 
 from .utils import (code_generator, create_shortcode)
+from.validators import validate_url, validate_dot_com
 
 # Create your models here.
 
@@ -31,7 +32,7 @@ class ShortURLManager(models.Manager):
 
 
 class ShortURL(models.Model):
-    url = models.CharField(max_length=256, )
+    url = models.CharField(max_length=256, validators=[validate_url, validate_dot_com])
     shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True, null=True)
     update = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
