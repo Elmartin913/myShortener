@@ -37,6 +37,8 @@ class ShortURL(models.Model):
     update = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+    # short_url
+
     objects = ShortURLManager()
 
     def save(self, *args, **kwargs):

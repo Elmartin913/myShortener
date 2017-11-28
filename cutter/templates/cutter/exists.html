@@ -1,6 +1,7 @@
 <div style='align-text:center; width:800px; margin: 0 auto'>
     <h2>Shortcode exist. Ulr in DB</h2>
     <p>{{ object.url }}</p>
-    <p>{{ object.get_short_url }}</p>
+    <p>Count: {{ object.clickevent.count }}</p>
+    <p><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></p>
     <a href="/">+new</a>
 </div>

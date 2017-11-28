@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views import View
+
+from analytics.models import ClickEvent
 
 from .models import ShortURL
 from .forms import SubmitUrlForm
@@ -41,14 +43,17 @@ class HomeView(View):
         return render(request, template, context)
 
 
-class CutterCBView(View):  # class base view
+class CutterRedirectView(View):  # class base view
     def get(self, request, shortcode=None, *args, **kwargs):
-        # print(shortcode)
-        obj = get_object_or_404(ShortURL, shortcode=shortcode)
-        return HttpResponse('hello again {}'.format(obj.url))
+        qs = ShortURL.objects.filter(shortcode__iexact=shortcode)
+        if qs.count() != 1 and not qs.exists():
+            raise Http404
+        obj = qs.first()
+        print(ClickEvent.objects.create_event(obj))
+        return HttpResponseRedirect(obj.url)
 
-    def post(self, request, *arg, **kwargs):
-        pass
+    # print(shortcode)
+        #obj = get_object_or_404(ShortURL, shortcode=shortcode)
 
 
 # def cutter_fb_view(request, shortcode=None, *args, **kwargs):
