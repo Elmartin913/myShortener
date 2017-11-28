@@ -1,9 +1,27 @@
-<div style="align-text:center; width: 800px; margin: 0 auto;">
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>myCutter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div style="text-center col-sm-12">
     <h2>{{ title }}</h2>
     <form method="POST" action="."> {% csrf_token %}
         <!-- <input name="url" type="text" placeholder="url"/> -->
         {{ form.as_p }}
-        <input type="submit" value="Shorten">
+        <input class="btn btn-primary" type="submit" value="Shorten">
     </form>
 </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
 
